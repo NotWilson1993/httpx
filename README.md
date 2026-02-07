@@ -17,11 +17,11 @@ Just less boilerplate.
 ## Features
 
 - Minimal `Request` struct:
-- `URL`
-- `Method`
-- `Type` (`json`, `xml`, `plain`)
-- `Retry` (bool)
-- `Client` (*http.Client)
+  - `URL`
+  - `Method`
+  - `Type` (`json`, `xml`, `plain`)
+  - `Retry` (bool)
+  - `Client` (*http.Client)
 - Single `Perform(...)` call
 - Context support (`context.Context`)
 - Default timeout (15s) with optional override
