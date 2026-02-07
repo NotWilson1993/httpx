@@ -41,7 +41,7 @@ func isRetryableError(err error) bool {
 	}
 	var ne net.Error
 	if errors.As(err, &ne) {
-		return ne.Timeout() || ne.Temporary()
+		return ne.Timeout()
 	}
 	return false
 }

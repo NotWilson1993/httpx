@@ -51,10 +51,10 @@ func (r Request) Perform(
 	}
 
 	if strings.TrimSpace(r.URL) == "" {
-		return nil, nil, fmt.Errorf("URL is empty")
+		return nil, nil, fmt.Errorf("url is empty")
 	}
 	if strings.TrimSpace(r.Method) == "" {
-		return nil, nil, fmt.Errorf("Method is empty")
+		return nil, nil, fmt.Errorf("method is empty")
 	}
 	if r.Type == "" {
 		r.Type = BodyJSON
@@ -140,7 +140,7 @@ func (r Request) Perform(
 		}
 
 		respBody, readErr := io.ReadAll(resp.Body)
-		resp.Body.Close()
+		closeErr := resp.Body.Close()
 		if readErr != nil {
 			if r.Retry && i < attempts {
 				lastResp, lastBody = resp, respBody
@@ -148,6 +148,14 @@ func (r Request) Perform(
 				continue
 			}
 			return resp, nil, fmt.Errorf("read response: %w", readErr)
+		}
+		if closeErr != nil {
+			if r.Retry && i < attempts {
+				lastResp, lastBody = resp, respBody
+				sleepBackoff(ctx, i)
+				continue
+			}
+			return resp, respBody, fmt.Errorf("close response: %w", closeErr)
 		}
 
 		lastResp, lastBody = resp, respBody
