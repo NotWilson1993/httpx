@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.2 - 2026-02-07
+
+### Fixed
+- Resolved golangci-lint findings (error strings, deprecated Temporary(), Close() error handling).
+- Updated CI lint action and version to support Go 1.25.
+
 ## v0.1.1 - 2026-02-07
 
 ### Fixed
