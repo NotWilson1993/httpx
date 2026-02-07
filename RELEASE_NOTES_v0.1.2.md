@@ -5,4 +5,5 @@ Maintenance release.
 ## Fixes
 - Addressed golangci-lint findings (error strings, deprecated Temporary(), and Close() error handling).
 - CI lint config aligned to Go 1.25.
+- README feature list formatting fix.
 
